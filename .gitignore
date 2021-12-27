@@ -1,6 +1,9 @@
 # Mac directory file
 .DS_Store
 
+# VS Code setting
+.vscode 
+
 # Build and Release Folders
 bin-debug/
 bin-release/
