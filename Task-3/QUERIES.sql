@@ -115,6 +115,12 @@ CASE
 -- 'guitar' change with {variable}
 SELECT instrument, brand, price FROM instruments WHERE instrument = 'guitar' AND is_rented = FALSE;
 
+SELECT 'NUMBER OF ENSEMBLES LESSONS';
+
+SELECT DATE_TRUNC('month',time) AS time, lesson_type AS type,
+COUNT (id) AS count FROM lessons  
+GROUP BY DATE_TRUNC('month', time) ORDER BY time;
+
 -- 'Hilliary' change with {variable}
 -- implemente in JAVA max gräns på 2 för varje student.
 SELECT instrument_id, instrument, brand, price, is_rented, school_id  FROM instrument_rental  WHERE instrument = 'Hilliary' AND is_rented  = 'false';
@@ -129,3 +135,26 @@ SELECT instrument_id, instrument, brand, price, is_rented, school_id  FROM instr
                  ) 
                     UPDATE instruments SET is_rented = 'true' 
                 WHERE instrument_id IN (SELECT instrument_id FROM rented);
+
+
+(SELECT DATE_TRUNC('month',time) AS time, 
+COUNT (id) AS count FROM indivdual_lesson  
+GROUP BY DATE_TRUNC('month', time) ORDER BY time;)
+UNION ALL 
+(
+  ELECT DATE_TRUNC('month',time) AS time,  
+  COUNT (id) AS count FROM ensembles_lesson
+   GROUP BY DATE_TRUNC('month', time) ORDER BY time;
+)
+
+(SELECT DATE_TRUNC('month',time) AS time,   
+COUNT (id) AS ind FROM indivdual_lesson  )         
+             
+UNION ALL
+(
+  SELECT DATE_TRUNC('month',time) AS time,
+COUNT (id) AS ens FROM ensembles_lesson
+GROUP BY DATE_TRUNC('month', time) ORDER BY time
+)            
+;
+GROUP BY DATE_TRUNC('month', time) ORDER BY time)

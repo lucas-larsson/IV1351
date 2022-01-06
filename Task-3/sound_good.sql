@@ -12,7 +12,7 @@ CREATE TABLE instruments (
  instrument_id VARCHAR(10) NOT NULL,
  instrument VARCHAR(50),
  brand VARCHAR(50),
- price VARCHAR(10),
+ price FLOAT,
  is_rented BOOLEAN
 );
 
@@ -80,7 +80,7 @@ ALTER TABLE instructure_salary ADD CONSTRAINT PK_instructure_salary PRIMARY KEY 
 
 
 CREATE TABLE instrument_rental (
- school_id VARCHAR(10) NOT NULL,
+ school_id VARCHAR(10),
  start_date DATE NOT NULL DEFAULT CURRENT_DATE,
  end_date DATE NOT NULL DEFAULT CURRENT_DATE + INTERVAL '1 year'
 )INHERITS (instruments);
