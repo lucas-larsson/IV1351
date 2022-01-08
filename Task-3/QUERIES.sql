@@ -99,21 +99,13 @@ CASE
 
 
 
---  time = date_trunc('week', CURRENT_TIMESTAMP + interval '1 week') AND
-  --     time  < date_trunc('week', CURRENT_TIMESTAMP)
-  --
-   --(time < date_trunc('week', CURRENT_TIMESTAMP + interval '1 week') and
-     --  time >= date_trunc('week', CURRENT_TIMESTAMP)
-      --)
- 
-
   -- SOLUTION FOR QUERY in task 4 --
 
 
 
 
 -- 'guitar' change with {variable}
-SELECT instrument, brand, price FROM instruments WHERE instrument = 'guitar' AND is_rented = FALSE;
+
 
 SELECT 'NUMBER OF ENSEMBLES LESSONS';
 
@@ -121,40 +113,49 @@ SELECT DATE_TRUNC('month',time) AS time, lesson_type AS type,
 COUNT (id) AS count FROM lessons  
 GROUP BY DATE_TRUNC('month', time) ORDER BY time;
 
--- 'Hilliary' change with {variable}
--- implemente in JAVA max gräns på 2 för varje student.
-SELECT instrument_id, instrument, brand, price, is_rented, school_id  FROM instrument_rental  WHERE instrument = 'Hilliary' AND is_rented  = 'false';
 
--- insert into instrument_rental (instrument_id, instrument, brand , price, is_rented, school_id, start_date, end_date)
-  -- values ('128', 'Thorsten', 'Danigel', '366 SEK', true, 1, '2021-12-02 09:42:58', '2021-01-12 20:34:36');
- -- values inhertied from instrument. 
+-- for checking rented instrunmenrt 
+SELECT instrument_id, instrument, brand, price, is_rented, school_id  FROM instrument_rental  WHERE instrument = {instrument} AND is_rented  = 'false';
 
-             WITH  rented  as (
-                 UPDATE instrument_rental SET is_rented = 'true',  
-                 end_date = CURRENT_DATE WHERE instrument_id='408' returning * 
+
+ -- for renting 
+  WITH  rented  as (
+                 UPDATE instrument_rental SET is_rented = TRUE, school_id ='52675', 
+                 start_date = CURRENT_DATE, end_date = CURRENT_DATE + INTERVAL '1 year' WHERE instrument_id=  '150' returning * 
                  ) 
-                    UPDATE instruments SET is_rented = 'true' 
+                    UPDATE instruments SET is_rented = TRUE
+                WHERE instrument_id IN (SELECT instrument_id FROM rented);
+
+-- for rent termination
+             WITH  rented  as (
+                 UPDATE instrument_rental SET is_rented = FALSE,  
+                 end_date = CURRENT_DATE WHERE instrument_id= {id} returning * 
+                 ) 
+                    UPDATE instruments SET is_rented = FALSE
                 WHERE instrument_id IN (SELECT instrument_id FROM rented);
 
 
-(SELECT DATE_TRUNC('month',time) AS time, 
-COUNT (id) AS count FROM indivdual_lesson  
-GROUP BY DATE_TRUNC('month', time) ORDER BY time;)
-UNION ALL 
-(
-  ELECT DATE_TRUNC('month',time) AS time,  
-  COUNT (id) AS count FROM ensembles_lesson
-   GROUP BY DATE_TRUNC('month', time) ORDER BY time;
-)
 
-(SELECT DATE_TRUNC('month',time) AS time,   
-COUNT (id) AS ind FROM indivdual_lesson  )         
-             
-UNION ALL
-(
-  SELECT DATE_TRUNC('month',time) AS time,
-COUNT (id) AS ens FROM ensembles_lesson
-GROUP BY DATE_TRUNC('month', time) ORDER BY time
-)            
-;
-GROUP BY DATE_TRUNC('month', time) ORDER BY time)
+                INSERT INTO rental_archive (instrument_id, instrument, brand , price, student_id) 
+                SELECT instrument_id, instrument, brand , price, school_id FROM instrument_rental;
+
+
+
+
+
+-- high grade 3 
+INSERT INTO lessons_archive ( school_id, lesson_type, price)
+SELECT school_id, lesson_type, price FROM lessons
+WHERE extract(DAY FROM time) = extract(DAY FROM now());
+
+
+WITH  rented  as (
+                 UPDATE instrument_rental 
+                 SET 
+                 is_rented = FALSE,
+                 end_date = CURRENT_DATE,
+                 student_id = null, 
+                  WHERE instrument_id= ? returning * 
+                 ) 
+                    UPDATE instruments SET is_rented = FALSE
+                WHERE instrument_id IN (SELECT instrument_id FROM rented);
