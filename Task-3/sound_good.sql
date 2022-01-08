@@ -108,12 +108,12 @@ CREATE TABLE schedule (
 ALTER TABLE schedule ADD CONSTRAINT PK_schedule PRIMARY KEY (id,staff_id);
 
 
-CREATE TABLE instructuer_bookings (
+CREATE TABLE instructor_bookings (
  booking_id VARCHAR(10) NOT NULL,
  instructor_id VARCHAR(10) NOT NULL
 );
 
-ALTER TABLE instructuer_bookings ADD CONSTRAINT PK_instructuer_bookings PRIMARY KEY (booking_id,instructor_id);
+ALTER TABLE instructor_bookings ADD CONSTRAINT PK_instructor_bookings PRIMARY KEY (booking_id,instructor_id);
 
 
 CREATE TABLE lessons (
@@ -153,12 +153,12 @@ CREATE TABLE group_lesson (
 ALTER TABLE group_lesson ADD CONSTRAINT PK_group_lesson PRIMARY KEY (lesson_id);
 
 
-CREATE TABLE indivdual_lesson (
+CREATE TABLE individual_lesson (
  lesson_id VARCHAR(10) NOT NULL,
- appoitment TIMESTAMP
+ appointment TIMESTAMP
 )INHERITS (lessons);
 
-ALTER TABLE indivdual_lesson ADD CONSTRAINT PK_indivdual_lesson PRIMARY KEY (lesson_id);
+ALTER TABLE individual_lesson ADD CONSTRAINT PK_indivdual_lesson PRIMARY KEY (lesson_id);
 
 
 ALTER TABLE student_bookings ADD CONSTRAINT FK_student_bookings_0 FOREIGN KEY (booking_id) REFERENCES bookings (booking_id);
@@ -180,8 +180,8 @@ ALTER TABLE instrument_rental ADD CONSTRAINT FK_instrument_rental_1 FOREIGN KEY 
 ALTER TABLE schedule ADD CONSTRAINT FK_schedule_0 FOREIGN KEY (staff_id) REFERENCES staff (id);
 
 
-ALTER TABLE instructuer_bookings ADD CONSTRAINT FK_instructuer_bookings_0 FOREIGN KEY (booking_id) REFERENCES bookings (booking_id);
-ALTER TABLE instructuer_bookings ADD CONSTRAINT FK_instructuer_bookings_1 FOREIGN KEY (instructor_id) REFERENCES instructor_salary (instructor_id);
+ALTER TABLE instructor_bookings ADD CONSTRAINT FK_instructor_bookings_0 FOREIGN KEY (booking_id) REFERENCES bookings (booking_id);
+ALTER TABLE instructor_bookings ADD CONSTRAINT FK_instructor_bookings_1 FOREIGN KEY (instructor_id) REFERENCES instructor_salary (instructor_id);
 
 
 ALTER TABLE lessons ADD CONSTRAINT FK_lessons_0 FOREIGN KEY (id,staff_id) REFERENCES schedule (id,staff_id);
@@ -239,9 +239,9 @@ COMMENT ON COLUMN schedule.place IS 'place';
 COMMENT ON COLUMN schedule.time IS 'time';
 COMMENT ON COLUMN schedule.instructor IS 'instructor';
 COMMENT ON COLUMN schedule.lesson_type IS 'lesson_type';
-COMMENT ON TABLE instructuer_bookings IS 'instructuer_bookings';
-COMMENT ON COLUMN instructuer_bookings.booking_id IS 'booking_id';
-COMMENT ON COLUMN instructuer_bookings.instructor_id IS 'instructor_id';
+COMMENT ON TABLE instructor_bookings IS 'instructor_bookings';
+COMMENT ON COLUMN instructor_bookings.booking_id IS 'booking_id';
+COMMENT ON COLUMN instructor_bookings.instructor_id IS 'instructor_id';
 COMMENT ON TABLE lessons IS 'lessons';
 COMMENT ON COLUMN lessons.instructor IS 'instructor';
 COMMENT ON COLUMN lessons.instrument IS 'instrument';
@@ -258,9 +258,9 @@ COMMENT ON COLUMN ensembles_lesson.lesson_id IS 'lesson_id';
 COMMENT ON COLUMN ensembles_lesson.genre IS 'genre';
 COMMENT ON TABLE group_lesson IS 'group_lesson';
 COMMENT ON COLUMN group_lesson.lesson_id IS 'lesson_id';
-COMMENT ON TABLE indivdual_lesson IS 'indivdual_lesson';
-COMMENT ON COLUMN indivdual_lesson.lesson_id IS 'lesson_id';
-COMMENT ON COLUMN indivdual_lesson.appoitment IS 'appoitment';
+COMMENT ON TABLE individual_lesson IS 'individual_lesson';
+COMMENT ON COLUMN individual_lesson.lesson_id IS 'lesson_id';
+COMMENT ON COLUMN individual_lesson.appointment IS 'appointment';
 COMMENT ON TABLE rental_archive IS 'rental_archive';
 COMMENT ON COLUMN rental_archive.instrument IS 'instrument';
 COMMENT ON COLUMN rental_archive.brand IS 'brand';
