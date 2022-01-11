@@ -58,7 +58,7 @@ AS AVG FROM lessons GROUP BY DATE_TRUNC('month', time) ORDER BY time;
        select instructor, count (id)                                                                                                                                                                                 from lessons  WHERE date_trunc('month', time)=date_trunc('month',current_timestamp)
        group by instructor order by count DESC
     )
-    SELECT * FROM time_report WHERE count > x;
+    SELECT * FROM time_report WHERE count > 2;
 
 --------------------------------------------------------------------
 
