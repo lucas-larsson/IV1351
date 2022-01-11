@@ -41,12 +41,14 @@ GROUP BY DATE_TRUNC('year', time) ORDER BY time;
 SELECT 'AVG OF GROUP LESSEON';
 SELECT DATE_TRUNC('year',time) AS time, 
 ROUND((CAST (COUNT(id)AS DECIMAL)/12)::DECIMAL,2)  
-AS AVG FROM group_lesson GROUP BY DATE_TRUNC('year', time) ORDER BY time;
+AS AVG FROM group_lesson 
+GROUP BY DATE_TRUNC('year', time) ORDER BY time;
 
 SELECT 'AVG OF LESSEON';
 SELECT DATE_TRUNC('year',time) AS time, 
 ROUND((CAST (COUNT(id)AS DECIMAL)/12)::DECIMAL,2)  
-AS AVG FROM lessons GROUP BY DATE_TRUNC('year', time) ORDER BY time;
+AS AVG FROM lessons 
+GROUP BY DATE_TRUNC('year', time) ORDER BY time;
 -- SOLUTION FOR QUERY 3 --
 --------------------------------------------------------------------
 
