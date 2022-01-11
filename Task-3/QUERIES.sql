@@ -75,7 +75,7 @@ CASE
  WHEN max_places = booked_places 
  THEN 'full booked'
  
- WHEN max_places - booked_places = 2 
+ WHEN max_places - booked_places <= 2 
  THEN '1-2 seats left' 
  
  ELSE 'there is more than 2 places' 
