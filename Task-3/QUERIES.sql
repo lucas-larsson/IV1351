@@ -27,27 +27,26 @@ GROUP BY DATE_TRUNC('month', time) ORDER BY time;
 
 
 SELECT 'AVG OF ENSEMBLES LESSEON';
-SELECT DATE_TRUNC('month',time) AS time, 
+SELECT DATE_TRUNC('year',time) AS time, 
 ROUND((CAST (COUNT(id)AS DECIMAL)/12)::DECIMAL,2)  
 AS AVG FROM ensembles_lesson 
-GROUP BY DATE_TRUNC('month', time) ORDER BY time;
+GROUP BY DATE_TRUNC('year', time) ORDER BY time;
 
 SELECT 'AVG OF INDIVDUAL LESSEON';
-SELECT DATE_TRUNC('month',time) AS time, 
+SELECT DATE_TRUNC('year',time) AS time, 
 ROUND((CAST (COUNT(id)AS DECIMAL)/12)::DECIMAL,2)  
 AS AVG FROM individual_lesson 
-GROUP BY DATE_TRUNC('month', time) ORDER BY time;
+GROUP BY DATE_TRUNC('year', time) ORDER BY time;
 
 SELECT 'AVG OF GROUP LESSEON';
-SELECT DATE_TRUNC('month',time) AS time, 
+SELECT DATE_TRUNC('year',time) AS time, 
 ROUND((CAST (COUNT(id)AS DECIMAL)/12)::DECIMAL,2)  
-AS AVG FROM group_lesson GROUP BY DATE_TRUNC('month', time) ORDER BY time;
+AS AVG FROM group_lesson GROUP BY DATE_TRUNC('year', time) ORDER BY time;
 
 SELECT 'AVG OF LESSEON';
-SELECT DATE_TRUNC('month',time) AS time, 
+SELECT DATE_TRUNC('year',time) AS time, 
 ROUND((CAST (COUNT(id)AS DECIMAL)/12)::DECIMAL,2)  
-AS AVG FROM lessons GROUP BY DATE_TRUNC('month', time) ORDER BY time;
-
+AS AVG FROM lessons GROUP BY DATE_TRUNC('year', time) ORDER BY time;
 -- SOLUTION FOR QUERY 3 --
 --------------------------------------------------------------------
 
@@ -60,7 +59,7 @@ AS AVG FROM lessons GROUP BY DATE_TRUNC('month', time) ORDER BY time;
        WHERE date_trunc('month', time)=date_trunc('month',current_timestamp)
        group by instructor order by count DESC
     )
-    SELECT * FROM time_report WHERE count > 2;
+    SELECT * FROM time_report WHERE count > x;
 
 --------------------------------------------------------------------
 
