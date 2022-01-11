@@ -55,7 +55,9 @@ AS AVG FROM lessons GROUP BY DATE_TRUNC('month', time) ORDER BY time;
     -- has worked over x lessons per current month
 
    WITH time_report AS (
-       select instructor, count (id)                                                                                                                                                                                 from lessons  WHERE date_trunc('month', time)=date_trunc('month',current_timestamp)
+       select instructor, count (id)
+       from lessons  
+       WHERE date_trunc('month', time)=date_trunc('month',current_timestamp)
        group by instructor order by count DESC
     )
     SELECT * FROM time_report WHERE count > 2;
@@ -133,3 +135,8 @@ AND is_rented  = 'false';
                  ) 
                     UPDATE instruments SET is_rented = FALSE
                 WHERE instrument_id IN (SELECT instrument_id FROM rented);
+
+
+
+
+                
