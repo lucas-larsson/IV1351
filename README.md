@@ -1,11 +1,6 @@
 # IV1351-Data-Lagrning
 
-## `This is a schoo project in colaberation with Dennis Hadzilc`
-
-
-
-
-
+## `This is a school project in colaberation with Dennis Hadzilc`
 
 
 ## instructions on running the databse fram a CLI
