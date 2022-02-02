@@ -1,17 +1,26 @@
-# IV1351-Data-Lagrning
-### Task 1
- - done just need to remove comments
- - status : in progress 90 %
+# IV1351
 
-### Task 2
-done just need to remove comments
-- status : in progress 90 %
+## instructions on running the databse fram a CLI
 
-### Task 3
-all requierd queries are done
-- status : done 100 %
-### Task 4
-all requierd queries are done
-- status : in progress 40 %
+In the working directory of the database i.e. Task-3 
+run the following commands.
 
+ ```
+psql
+```
+ ```
+CREATE DATABASE "name of the database"
+```
+```
+ \c name of the databse
+ ```
+```
+\i sound_good.sql
+```
+```
+ \i data.sql
+ ```
 
+ ```
+ \i queries.sql
+ ```
